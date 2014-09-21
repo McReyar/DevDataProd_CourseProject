@@ -14,9 +14,6 @@ github      :
   user      : McReyar
   repo      : DevDataProd_CourseProject
 ---
-.title-slide {
-  background-color: #CBE7A5; /* #EDE0CF; ; #CA9F9D*/
-}
 
 ## Overview
 

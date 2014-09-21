@@ -14,9 +14,6 @@ github      :
   user      : McReyar
   repo      : DevDataProd_CourseProject
 ---
-.title-slide {
-  background-color: #CBE7A5; /* #EDE0CF; ; #CA9F9D*/
-}
 
 ## Overview
 
@@ -42,7 +39,7 @@ The Calender is based on the very powerful [Google chart API](https://developers
 
 The line chart shows the price history of the stock. Adjusted prices are used and therefore splits and dividend payments are considered.
 
-<iframe src=' assets/fig/unnamed-chunk-1.html ' scrolling='no' frameBorder='0' seamless class='rChart dygraph ' id=iframe- chart12a431aa4fd8 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
+<iframe src=' assets/fig/unnamed-chunk-1.html ' scrolling='no' frameBorder='0' seamless class='rChart dygraph ' id=iframe- chart12605d1250cf ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
 By clicking and draging an interesting timespan can be observed more closely. Double-clicking on the  chart will zoom back out.
 
 ---
@@ -51,7 +48,7 @@ By clicking and draging an interesting timespan can be observed more closely. Do
 
 In the classic candletick chart the open, close, low and high of each day are shown:
 
-<iframe src=' assets/fig/unnamed-chunk-2.html ' scrolling='no' frameBorder='0' seamless class='rChart dygraph ' id=iframe- chart12a43559ab2 ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
+<iframe src=' assets/fig/unnamed-chunk-2.html ' scrolling='no' frameBorder='0' seamless class='rChart dygraph ' id=iframe- chart126052b1ecd ></iframe> <style>iframe.rChart{ width: 100%; height: 400px;}</style>
 This makes it possible to identify specific formations.
 
 ---
