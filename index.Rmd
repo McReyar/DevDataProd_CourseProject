@@ -1,0 +1,103 @@
+---
+title       : Stock Chart
+subtitle    : Visualization of Stock Prices and Returns
+author      : McReyar
+job         : Course Project for Developing Data Products on Coursera
+logo        : candlestick.png
+framework   : io2012      # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : monokai      # 
+widgets     : []
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+github      :
+  user      : McReyar
+  repo      : DevDataProd_CourseProject
+---
+
+## Overview
+
+Despite the financial crisis stock trading is still quite popular. Visualizing stock prices and returns can help selecting the right share and the right time to buy or sell them.  
+<br />
+*** {name: left}
+  
+The Shiny App [Stock Chart](https://mcreyar.shinyapps.io/StockChart/) makes it possible to visualize any share for which [Yahoo](http://finance.yahoo.com/) provides financial data.  Following charts are available:  
+* Line Chart: adjusted prices
+* Candlestick Chart: open, close, low and high
+* Calendar: daily returns
+  
+*** {name: right}
+  
+For the line and candlestick charts [dygraphs](http://dygraphs.com/) is used, which not only makes the charts interactive but it is also very fast.  
+<br />
+The Calender is based on the very powerful [Google chart API](https://developers.google.com/chart/)
+
+
+---
+
+## Line Chart
+
+The line chart shows the price history of the stock. Adjusted prices are used and therefore splits and dividend payments are considered.
+
+```{r, echo=FALSE, message=FALSE, cache=FALSE, results='asis'}
+library(quantmod)
+BA <- getSymbols("BA", from = "2008-01-01", warnings = FALSE, auto.assign = FALSE)
+
+library(rCharts)
+library(rChartsDygraphs)
+
+dg <- dygraph(BA[,6], height=350)
+dg
+```
+By clicking and draging an interesting timespan can be observed more closely. Double-clicking on the  chart will zoom back out.
+
+---
+
+## Candlestick Chart
+
+In the classic candletick chart the open, close, low and high of each day are shown:
+
+```{r, echo=FALSE, message=FALSE, cache=FALSE, results='asis'}
+dg <- dygraph(BA["2014"], height=350)
+dg
+```
+This makes it possible to identify specific formations.
+
+---
+
+## Calendar of Daily Returns
+
+Seasonal trends or patterns affecting specific days can be seen on the heatmap calendar.
+The daily returns are coded by colour, which makes it possible to quickly identify days with exceptionally high loss or return.
+
+```{r fig.width=6, fig.height=2.5, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+#library(zoo)
+#library(quantmod)
+library(googleVis)
+options(gvis.plot.tag="chart")
+#BA <- getSymbols("BA", from = "2008-01-01", warnings = FALSE, auto.assign = FALSE)
+ret.df <- data.frame(date=index(BA["2013/"])
+                    ,ret = round(100*coredata(periodReturn(BA["2013/"], period='daily')),2))
+plot(
+    gvisCalendar(ret.df
+                ,datevar = "date"
+                ,numvar  = "daily.returns"
+                ,options = list(title = "Daily Returns"
+                               ,height = 300
+                               ,width  = 865
+                               ,calendar = "{yearLabel: {fontName: 'Times-Roman'
+                                                        ,fontSize: 32
+                                                        ,color: '#1A8763'
+                                                        ,bold: true}
+                                            ,cellSize: 15
+                                            ,cellColor: {stroke: 'red'
+                                                        ,strokeOpacity: 0.2 }
+                                            ,focusedCellColor: {stroke:'red'}
+                                            }"
+                               )
+    )
+)
+
+```
+
+By hoovering over a specific day, the exact return in percent can be examined.
